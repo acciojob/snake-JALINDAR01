@@ -10,8 +10,11 @@ let direction = 'right'; // Initial direction
 let food = generateFood(); // Initial food position
 let score = 0;
 
+// Initialize the score
+scoreElement.textContent = 0;
+
 // Game loop
-const gameLoop = setInterval(moveSnake, 100);
+const gameLoop = setInterval(moveSnake, 100); // Move 1 pixel in 100ms
 
 // Handle keyboard input to change snake direction
 document.addEventListener('keydown', (event) => {
@@ -70,9 +73,9 @@ function moveSnake() {
     score++;
     scoreElement.textContent = score;
     food = generateFood();
-    snake.unshift(newHead); // Add new head to the snake (growing)
+    snake.unshift({ ...newHead }); // Add new head to the snake (growing)
   } else {
-    // Move the snake by adding a new head and removing the tail
+    // Move the snake by adding a new head and keeping the tail
     snake.unshift(newHead);
     snake.pop();
   }
@@ -109,6 +112,3 @@ function updateGrid() {
     gameContainer.appendChild(segmentElement);
   });
 }
-
-// Initialize the game
-updateGrid();
